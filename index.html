@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Random game icon</title>
+		<style type="text/css">
+			body { background-color: #222; overflow: hidden; }
+			* { font-family: 'Montserrat', Arial, Helvetica, sans-serif; }
+			div.content-wrapper { position: absolute; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
+			div.icon { width: 500px; height: 500px; border-radius: .5em; background-color:#DDD; display: flex; align-items: center; justify-content: center; flex-direction: column; }
+			img { width: 200px; height: 200px; }
+			a { margin-top: 2em; color: #2388CB; text-decoration: none; font-weight: bold; }
+			a:hover { color: #56BBED; }
+		</style>
+	</head>
+	<body>
+		<div class="content-wrapper">
+			<div class="icon">
+				<img id="icon" src="" />
+				<a id="generate" href="#0">Générer une nouvelle icône</a>
+			</div>
+		</div>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script type="text/javascript" async>
+
+			$(document).ready(function() {
+				
+				icons = [];
+				
+				$.get("icons/", function(data) {
+					
+					$(data).find("a:contains(svg)").each(function() {
+						icons.push($(this).text());
+                    });
+
+                    function getRandomIcon() {
+						var icon = icons[Math.floor(Math.random()*icons.length)];
+						$("#icon").attr('src', "icons/"+icon);
+					}
+
+					getRandomIcon();
+
+					$("#generate").on('click', function() {
+						getRandomIcon();
+					});
+
+				});
+
+			});
+		</script>
+	</body>
+</html>
