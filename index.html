@@ -16,7 +16,6 @@
 	<body>
 		<div class="content-wrapper">
 			<div class="icon">
-				<img id="icon" src="" />
 				<a id="generate" href="#0">Générer une nouvelle icône</a>
 			</div>
 		</div>
@@ -33,12 +32,13 @@
 						icons.push($(this).text());
                     });
 
+                    var icon = icons[Math.floor(Math.random()*icons.length)];
+                    $('.icon').prepend('<img id="icon" src="icons/'+icon+'" />');
+
                     function getRandomIcon() {
 						var icon = icons[Math.floor(Math.random()*icons.length)];
 						$("#icon").attr('src', "icons/"+icon);
 					}
-
-					getRandomIcon();
 
 					$("#generate").on('click', function() {
 						getRandomIcon();
